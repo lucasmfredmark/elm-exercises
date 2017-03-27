@@ -5,6 +5,15 @@ import Json.Decode as Decode
 import Json.Decode exposing (Decoder, string)
 import Json.Decode.Pipeline exposing (decode, required, requiredAt)
 
+--
+-- Exercise 2
+-- In this exercise you receive a JSON object representing a random person
+-- from randomuser.me. Read the documentation to get the exact format:
+-- https://randomuser.me/documentation#howto
+-- Your job is to decode the name, email, username and password from the
+-- FIRST user in the JSON result list you get back
+--
+
 type Msg
   = FetchPerson
   | NewPerson (Result Http.Error Person)

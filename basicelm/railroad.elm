@@ -30,12 +30,9 @@ view model =
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Count input ->
-      mergeStrings input
-      |> countStringLength
-      |> resultToModel
+  Debug.crash "Not yet implemented"
 
+main : Program Never Model Msg
 main = Html.beginnerProgram
   { model = Model Nothing
   , view = view
