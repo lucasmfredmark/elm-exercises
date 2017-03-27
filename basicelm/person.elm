@@ -28,11 +28,22 @@ update msg model =
 
 personDecoder : Decoder Person
 personDecoder =
+  Debug.crash "Not implemented yet"
   -- Decode JSON to a person
 
 fetchRandomPerson : Cmd Msg
 fetchRandomPerson =
-  -- Send the HTTP request
+  Http.send NewPerson
+    ( Http.request
+      { method = "GET"
+      , headers = []
+      , url = "https://randomuser.me/api/"
+      , body = Http.emptyBody
+      , expect = expectJson personDecoder
+      , timeout = Nothing
+      , withCredentials = False
+      }
+    )
 
 view : Model -> Html Msg
 view model =
