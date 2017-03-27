@@ -59,6 +59,7 @@ displayModel model =
   case model.person of
     Ok person ->
       [ h3 [] [text person.username ] ]
+      -- Show the rest of the person data
     Err error -> [ h3 [] [text error ]]
 
 main : Program Never Model Msg
