@@ -29,8 +29,13 @@ view model =
   ]
 
 update : Msg -> Model -> Model
-update msg model =
-  Debug.crash "Not yet implemented"
+update msg _ =
+  case msg of
+    Count maybeOfListMaybe ->
+      maybeOfListMaybe
+      |> mergeStrings
+      |> countStringLength
+      |> resultToModel
 
 main : Program Never Model Msg
 main = Html.beginnerProgram
@@ -44,15 +49,18 @@ main = Html.beginnerProgram
 
 mergeStrings : Maybe (List String) -> Result String String
 mergeStrings maybe =
-  Err "HAAARP"
-  -- Implement me!
+  case maybe of
+    Nothing -> Err "Lucas says this list doesn't exist"
+    Just list -> Ok (String.join "" list)
 
 countStringLength : Result String String -> Result String Int
 countStringLength result =
-  Err "Area 51"
-  -- Implement me!
+  case result of
+    Ok betterSomethingElse -> Ok (String.length betterSomethingElse)
+    Err message -> Err message
 
 resultToModel : Result String Int -> Model
 resultToModel result =
-  Model Nothing
-  -- Implement me!
+  case result of
+    Err someValueWhichIsAVariable -> Model Nothing
+    Ok itsAnInteger -> Model (Just itsAnInteger)
