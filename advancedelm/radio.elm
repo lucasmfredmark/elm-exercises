@@ -33,7 +33,7 @@ view : Model -> Html Msg
 view model =
   fieldset []
     [ label []
-        [ input [ type_ "radio", name "status-radio", checked True, onClick (SetStatus Single) ] []
+        [ input [ type_ "radio", name "status-radio", onClick (SetStatus Single) ] []
         , text "Single"
         ]
     , label []
@@ -44,19 +44,23 @@ view model =
         [ input [ type_ "radio", name "status-radio", onClick (SetStatus Relationship) ] []
         , text "In a relationship"
         ]
-    , label []
-        [ input [ type_ "radio", name "status-radio", onClick (SetStatus Married) ] []
-        , text "Married"
-        ]
-    , label []
-        [ input [ type_ "radio", name "status-radio", onClick (SetStatus Other) ] []
-        , text "Keep out of my private life!"
-        ]
+    , labelData "Married" Married model
+    , labelData "Keep out of my private life!" Other model
     ]
+
+labelData : String -> Status -> Model -> Html Msg
+labelData title status model =
+  let
+    isChecked = status == model.status
+  in
+   label []
+      [ input [ type_ "radio", name "status-radio", checked isChecked, onClick (SetStatus status) ] []
+      , text title
+      ]
 
 main =
   Html.program
-    { init = (Model Single, Cmd.none)
+    { init = (Model Married, Cmd.none)
     , view = view
     , update = update
     , subscriptions = \m -> Sub.none

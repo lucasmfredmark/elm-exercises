@@ -33,19 +33,17 @@ update msg model = case msg of
 view : Model -> Html Msg
 view model =
   fieldset []
-    [ label []
-        [ input [ type_ "checkbox", onClick ToggleNotifications ] []
-        , text "Show notifications"
-        ]
-    , label []
-        [ input [ type_ "checkbox", onClick ToggleDrag ] []
-        , text "Allow dragging"
-        ]
-    , label []
-        [ input [ type_ "checkbox", onClick ToggleColor ] []
-        , text "Use colors"
-        ]
+    [ helperCheckbox ToggleNotifications "Some text"
+    , helperCheckbox ToggleDrag "Drag me!"
     ]
+
+
+helperCheckbox : Msg -> String -> Html Msg
+helperCheckbox msg nameIshSomething =
+  label []
+      [ input [ type_ "checkbox", onClick msg ] []
+      , text nameIshSomething
+      ]
 
 main =
   Html.program
