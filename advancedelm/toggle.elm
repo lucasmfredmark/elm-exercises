@@ -37,7 +37,6 @@ view model =
     , helperCheckbox ToggleDrag "Drag me!"
     ]
 
-
 helperCheckbox : Msg -> String -> Html Msg
 helperCheckbox msg nameIshSomething =
   label []
@@ -45,6 +44,7 @@ helperCheckbox msg nameIshSomething =
       , text nameIshSomething
       ]
 
+main : Program Never Model Msg
 main =
   Html.program
     { init = (Model False False False, Cmd.none)

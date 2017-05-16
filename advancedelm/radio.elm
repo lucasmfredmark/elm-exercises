@@ -58,6 +58,7 @@ labelData title status model =
       , text title
       ]
 
+main : Program Never Model Msg
 main =
   Html.program
     { init = (Model Married, Cmd.none)
